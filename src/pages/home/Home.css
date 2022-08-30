@@ -1,0 +1,151 @@
+
+.home {
+
+    max-width: 100%;
+
+    padding: 5%;
+}
+
+.input-find {
+    background-color: rgb(238, 148, 148);
+
+    border: none;
+    border-radius: 30px;
+
+    width: 80%;
+    height: 25px;
+
+    padding: 5px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.input-find input {
+    background-color: transparent;
+    
+    border: none;
+    
+    width: 90%;
+    height: 25px;
+
+    padding-left: 10%;
+    padding-right: 10px;    
+
+    color: #222;
+    font-family: Georgia;
+    font-size: 12px;
+}
+
+.bi-search {
+    margin-left: 5%;
+    margin-top: 3%;
+
+    padding: 0px;
+
+    cursor: pointer;
+}
+
+.find {
+    display: flex;
+
+    flex-direction: row;
+
+    width: 100%;
+
+    margin-left: 2.5%;
+    margin-top: 20%;
+}
+
+.add {
+
+    cursor: pointer;
+
+    padding: 0px;
+
+    border: none;
+    border-radius: 30px;
+
+    background-color: rgb(238, 79, 79);
+
+    margin-top: 5%;
+    margin-left: 2.5%;
+
+    width: 98%;
+    height: 40px;
+
+    font-size: 11pt;
+
+    padding-top: -5px !important;
+}
+
+.bi-plus-lg {
+    margin-right: 25% !important;
+    margin-left: -25% !important;
+
+    margin-bottom: -3.3px !important;
+}
+
+
+@media (min-width: 500px) {
+
+    
+    .home {
+
+        max-width: 60% !important;
+
+        width: 60%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        padding: auto;
+
+        background-color: #fff;
+    }
+
+
+    .input-find {
+        background-color: rgb(238, 148, 148);
+    
+        border: none;
+        border-radius: 30px;
+    
+        width: 90%;
+        height: 45px;
+    
+        padding: 5px;
+    
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .input-find input {
+        
+        width: 90%;
+        height: 45px;
+    
+        padding-left: 10%;
+        padding-right: 10px;    
+    
+        color: #222;
+        font-family: Georgia;
+        font-size: 14pt;
+    }
+
+    .find {
+        display: flex;
+    
+        flex-direction: row;
+    
+        width: 100%;
+    
+        margin-left: 2.5%;
+        margin-top: 20%;
+    }
+
+    .bi-search {
+        width: 30px !important;
+        height: 30px !important;
+    }
+}

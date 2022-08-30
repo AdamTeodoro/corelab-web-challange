@@ -1,0 +1,158 @@
+
+
+.form-find {
+    background: #eee;
+
+    width: 80%;
+    height: auto !important;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: 10% !important;
+
+    padding: 0px;
+    padding-top: 10%;
+    
+}
+
+.form-element {
+    padding: 0px;
+
+    margin: 0px;
+
+    width: 100%;
+}
+
+.form-element label {
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 10pt;
+
+    margin-left: 15%;
+    margin-bottom: -0.5px;
+
+    font-weight: 600;
+}
+
+.form-element input, select {
+    
+    border: 1px #333 solid !important;
+    border: none;
+    border-radius: 30px !important;
+
+    padding-left: 5%;
+    padding-right: 5%;
+
+    height: 30px;
+    width: 70% !important;
+
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+}
+
+.form-element select {
+    width: 80% !important; 
+
+    height: 34px !important;
+
+    background-color: #fff;
+}
+
+.btn-submit {
+    margin-top: 30%;
+}
+
+.error-message {
+    margin-top: 5%;
+    margin-left: 10%;
+
+    color: rgb(209, 51, 51);
+}
+
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+
+    max-width: 90% !important;
+
+    width: auto !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (min-width: 500px) { 
+    .form-find {
+        background: #eee;
+
+        width: 60%;
+    }
+
+    .form-element {
+        padding: 0px;
+    
+        margin-left: 10%;
+        margin-bottom: 5%;
+    
+        width: 80% !important;
+    }
+
+    .form-element label {
+        font-family: Arial, Helvetica, sans-serif;
+    
+        font-size: 23pt !important;
+    
+        margin-left: 15%;
+        margin-bottom: -0.5px;
+    
+        font-weight: 100;
+    }
+
+    .form-element input {
+        font-family: Arial, Helvetica, sans-serif;
+    
+        font-size: 23pt !important;
+    
+        margin-left: 15%;
+        margin-bottom: -0.5px;
+
+        height: 50px;
+
+        border: none !important;
+
+        background: #fff;
+    }
+
+    .form-element select {
+        width: 80% !important; 
+    
+        height: 50px !important;
+    
+        background-color: #fff;
+
+        border: none !important;
+    }
+
+    .input-row {
+        display: flex;
+        flex-direction: row;
+    
+        max-width: 80% !important;
+    
+        width: auto !important;
+    
+        margin-left: 5% !important;
+        margin-right: auto !important;
+    }
+
+    .btn-submit {
+        width: 25%;
+        height: 50px;
+        
+        font-size: 14pt;
+
+        margin-top: 10% !important;
+    }
+}
