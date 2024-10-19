@@ -49,28 +49,19 @@ export default class Home extends React.Component {
     }
 
     openFormFind() {
-        this.setState({
-            openFormFind: true
-        })
+        this.setState({ openFormFind: true })
     }
 
     closeFormFind() {
-        this.setState({
-            openFormFind: false
-        })
+        this.setState({ openFormFind: false })
     }
 
     closeFind() {
-        this.setState({
-            isFinding: false
-        });
+        this.setState({ isFinding: false });
     }
 
     setVehiclesFindeds(vehiclesFindeds) {
-        this.setState({
-            vehiclesFindeds: vehiclesFindeds,
-            isFinding: true
-        });
+        this.setState({ vehiclesFindeds: vehiclesFindeds, isFinding: true });
     }
 
     async handleSubmit(event) {
@@ -79,17 +70,15 @@ export default class Home extends React.Component {
             await vehicleService.searchVehicle({
                 query: this.state.searchQuery.replace(',', '')
             })
-            .then((apiResponse) => {
-                this.setState({
-                    vehiclesFindeds: apiResponse.data.vehiclesFindeds,
-                    isFinding: false
-                });
-            })
-            .finally(() => {
-                this.setState({
-                    isFinding: true
+                .then((apiResponse) => {
+                    this.setState({
+                        vehiclesFindeds: apiResponse.data.vehiclesFindeds,
+                        isFinding: false
+                    });
                 })
-            });
+                .finally(() => {
+                    this.setState({ isFinding: true })
+                });
         }
     }
 
@@ -102,8 +91,7 @@ export default class Home extends React.Component {
             <>
                 {   
                     this.state.isFinding?
-                    <BackButton className="back-home" close={() => this.closeFind()}></BackButton>:
-                    ''
+                        <BackButton className="back-home" close={() => this.closeFind()}></BackButton>: ''
                 }
                 
                 <div className="home" style={{ marginTop: this.state.isFinding? '-15%': '-5%'  }}>
