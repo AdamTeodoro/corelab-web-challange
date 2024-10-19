@@ -21,10 +21,7 @@ import './MyVehicles.css';
 export default function MyVehicles() {
     
     const favorites = favoriteLocalService.getFavorites();
-    const [vehicles, setVehicles] = useState({
-        myVehicles: [],
-        favorites: []
-    });
+    const [vehicles, setVehicles] = useState({ myVehicles: [], favorites: [] });
     
     const [showUpdateVehicleForm, setShowUpdateVehicleForm] = useState(false);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -33,37 +30,29 @@ export default function MyVehicles() {
     //Load my vehicles
     useEffect(() => {
         vehicleService.listMyVehicles()
-        .then((apiResponse) => {
-            const myVehicles = apiResponse.data.myVehicles;
-            const onlyVehicles = [];
-            const onlyFavorites = [];
-            myVehicles.forEach((vehicle) => {
-                const exists = favorites.findIndex(
-                    (favorite) => vehicle.id === favorite.idVehicle
-                ) !== -1? true: false;
-                if (exists) {
-                    onlyFavorites.push(vehicle);
-                } else {
-                    onlyVehicles.push(vehicle);
-                }
+            .then((apiResponse) => {
+                const myVehicles = apiResponse.data.myVehicles;
+                const onlyVehicles = [];
+                const onlyFavorites = [];
+                myVehicles.forEach((vehicle) => {
+                    const exists = favorites
+                            .findIndex((favorite) => vehicle.id === favorite.idVehicle) !== -1? true: false;
+                    if (exists) {
+                        onlyFavorites.push(vehicle);
+                    } else {
+                        onlyVehicles.push(vehicle);
+                    }
+                });
+                setVehicles({ myVehicles: onlyVehicles, favorites: onlyFavorites });
             });
-            setVehicles({
-                myVehicles: onlyVehicles,
-                favorites: onlyFavorites
-            });
-        });
     }, []);
 
     async function deleteVehicle(idVehicle) {
         await vehicleService.deleteVehicle(idVehicle)
         .then(() => {
-            const updatedVehicles = vehicles.myVehicles.filter(
-                (vehicle) => vehicle.id !== idVehicle
-            );
-            setVehicles({
-                myVehicles: updatedVehicles,
-                favorites: vehicles.favorites
-            });
+            const updatedVehicles = vehicles.myVehicles
+                .filter((vehicle) => vehicle.id !== idVehicle);
+            setVehicles({ myVehicles: updatedVehicles, favorites: vehicles.favorites });
         })
     }
 
@@ -71,16 +60,11 @@ export default function MyVehicles() {
         await vehicleService.deleteVehicle(idVehicle)
         .then(() => {
             const favorites = favoriteLocalService.getFavorites();
-            const foundFavorite = favorites.filter(
-                (favorite) => favorite.idVehicle === idVehicle)[0];
+            const foundFavorite = favorites.filter((favorite) => favorite.idVehicle === idVehicle)[0];
             favoriteLocalService.removeFavorite(foundFavorite.id);
-            const updatedVehiclesFavorites = vehicles.favorites.filter(
-                (vehicle) => vehicle.id !== idVehicle
-            );
-            setVehicles({
-                myVehicles: vehicles.myVehicles,
-                favorites: updatedVehiclesFavorites
-            });
+            const updatedVehiclesFavorites = vehicles.favorites
+                .filter((vehicle) => vehicle.id !== idVehicle);
+            setVehicles({ myVehicles: vehicles.myVehicles, favorites: updatedVehiclesFavorites });
         })
     }
 
@@ -102,14 +86,12 @@ export default function MyVehicles() {
         let newMyVehicles = vehicles.myVehicles
         if (isFavorite) {
             newFavorites = vehicles.favorites
-            .filter((favorite) => favorite.id !== vehicle.id);
+                .filter((favorite) => favorite.id !== vehicle.id);
             newFavorites.push(vehicle);
-            console.log('newfavorites: ', newFavorites);
         } else {
             newMyVehicles = vehicles.myVehicles
-            .filter((myVehicle) => myVehicle.id !== vehicle.id);
+                .filter((myVehicle) => myVehicle.id !== vehicle.id);
             newMyVehicles.push(vehicle);
-            console.log('newMyVehicles: ', newMyVehicles);
         }
         setVehicles({
             myVehicles: newMyVehicles,
@@ -140,46 +122,31 @@ export default function MyVehicles() {
             // save local
             const newFavorite = apiResponse.data.newFavorite;
             favoriteLocalService.addFavorite(newFavorite);
-            console.log(favoriteLocalService.getFavorites())
             // remove of myvehicles
             const newMyVehicles = vehicles.myVehicles
-            .filter((vehicle) => vehicle.id !== idVehicle);
+                .filter((vehicle) => vehicle.id !== idVehicle);
             // copy the vehicle
             const newVehicleFavorite = vehicles.myVehicles
-            .filter((vehicle) => vehicle.id === idVehicle)[0]
+                .filter((vehicle) => vehicle.id === idVehicle)[0]
             //update favorites
             const newfavorites = vehicles.favorites;
             newfavorites.push(newVehicleFavorite);
-            setVehicles({ 
-                myVehicles: newMyVehicles,
-                favorites: newfavorites
-            });
+            setVehicles({ myVehicles: newMyVehicles, favorites: newfavorites });
         })
     }
 
     async function removeFavorite(idVehicle) {
         const myVehicles = vehicles.myVehicles;
         const favorites = vehicles.favorites;
-        const foundedFavorite = favoriteLocalService
-        .getFavorites()
-        .filter(
-            (favorite) => favorite.idVehicle === idVehicle
-        )[0];
+        const foundedFavorite = favoriteLocalService.getFavorites()
+            .filter((favorite) => favorite.idVehicle === idVehicle)[0];
         await favoriteService.deleteFavorite(foundedFavorite.id)
-        .then(() => {
-            favoriteLocalService.removeFavorite(foundedFavorite.id);
-            console.log(favoriteLocalService.getFavorites())
-            const newFavorites = favorites.filter(
-                (vehicle) => vehicle.id !== idVehicle
-            );
-            const newMyVehicles = favorites.filter(
-                (vehicle) => vehicle.id === idVehicle
-            );
-            setVehicles({
-                favorites: newFavorites,
-                myVehicles: myVehicles.concat(myVehicles, newMyVehicles)
-            });
-        })
+            .then(() => {
+                favoriteLocalService.removeFavorite(foundedFavorite.id);
+                const newFavorites = favorites.filter((vehicle) => vehicle.id !== idVehicle);
+                const newMyVehicles = favorites.filter((vehicle) => vehicle.id === idVehicle);
+                setVehicles({ favorites: newFavorites, myVehicles: myVehicles.concat(myVehicles, newMyVehicles) });
+            })
     }
 
     function showFavorites() {
@@ -258,13 +225,9 @@ export default function MyVehicles() {
     }
 
     function addVehicle(newVehicle) {
-        console.log(newVehicle);
         const myVehicles = vehicles.myVehicles;
         myVehicles.push(newVehicle);
-        setVehicles({
-            myVehicles,
-            favorites: vehicles.favorites
-        })
+        setVehicles({ myVehicles, favorites: vehicles.favorites })
     }
 
     function ShowCreateVehicleForm() {
