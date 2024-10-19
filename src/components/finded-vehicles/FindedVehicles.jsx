@@ -84,30 +84,20 @@ export default function FindedVehicles(props) {
 
     async function deleteFavorite(idVehicle) {
         const favorites = vehicles.favorites;
-        const foundedFavorite = favoriteLocalService
-        .getFavorites()
-        .filter(
-            (favorite) => favorite.idVehicle === idVehicle
-        )[0];
+        const foundedFavorite = favoriteLocalService.getFavorites()
+            .filter((favorite) => favorite.idVehicle === idVehicle)[0];
         await favoriteService.deleteFavorite(foundedFavorite.id)
-        .then(() => {
-            //remove localstorage
-            favoriteLocalService.removeFavorite(foundedFavorite.id);
-            const newFindeds = vehicles.findeds;
-            //remove on the favorites
-            const newFavorites = favorites.filter(
-                (vehicle) => vehicle.id !== idVehicle
-            );
-            //insert in findedes
-            const newFinded = favorites.filter(
-                (vehicle) => vehicle.id === idVehicle
-            )[0];
-            newFindeds.push(newFinded);
-            setVehicles({
-                favorites: newFavorites,
-                findeds: newFindeds
-            });
-        })
+            .then(() => {
+                //remove localstorage
+                favoriteLocalService.removeFavorite(foundedFavorite.id);
+                const newFindeds = vehicles.findeds;
+                //remove on the favorites
+                const newFavorites = favorites.filter((vehicle) => vehicle.id !== idVehicle);
+                //insert in founds
+                const newFinded = favorites.filter((vehicle) => vehicle.id === idVehicle)[0];
+                newFindeds.push(newFinded);
+                setVehicles({ favorites: newFavorites, findeds: newFindeds });
+            })
         
     }
 
