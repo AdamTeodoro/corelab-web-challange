@@ -39,17 +39,14 @@ export default function UpdateVehicleForm(props) {
                 setErrorMessage(isValid.error.details[0].message);
                 return;
             } else {
-                await vehicleService.updateVehicle(
-                    getVehicle(),
-                    props.id
-                )
-                .then(() => {
-                    let newVehicle = getVehicle();
-                    console.log("props.vehicle: ", props.vehicle.id);
-                    newVehicle.id = props.vehicle.id;
-                    props.updateVehicle(newVehicle);
-                    props.close();
-                });
+                await vehicleService.updateVehicle(getVehicle(), props.id)
+                    .then(() => {
+                        let newVehicle = getVehicle();
+                        console.log("props.vehicle: ", props.vehicle.id);
+                        newVehicle.id = props.vehicle.id;
+                        props.updateVehicle(newVehicle);
+                        props.close();
+                    });
                 
             }
         } catch {
