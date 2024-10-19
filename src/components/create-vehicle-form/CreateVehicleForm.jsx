@@ -40,10 +40,10 @@ export default function CreateVehicleForm(props) {
                 return;
             } else {
                await vehicleService.createVehicle(getVehicle())
-                .then((apiResponse) => {
-                    props.addVehicle(apiResponse.data.newVehicle);
-                    props.close();
-                });
+                    .then((apiResponse) => {
+                        props.addVehicle(apiResponse.data.newVehicle);
+                        props.close();
+                    });
             }
         } catch(error) {
             console.log(error);
