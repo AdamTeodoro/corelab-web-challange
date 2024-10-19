@@ -39,13 +39,11 @@ export default function FormFind(props) {
                 setErrorMessage(isValid.error.details[0].message);
                 return;
             } else {
-               await vehicleService.searchVehicle({
-                    queryForm: getFindData()
-                })
-                .then((apiResponse) => {
-                    props.setFindeds(apiResponse.data.vehiclesFindeds);
-                    return props.close();
-                });
+               await vehicleService.searchVehicle({ queryForm: getFindData() })
+                    .then((apiResponse) => {
+                        props.setFindeds(apiResponse.data.vehiclesFindeds);
+                        return props.close();
+                    });
             }
         } catch(error) {
             setErrorMessage('Erro desconhecido!');
@@ -105,9 +103,11 @@ export default function FormFind(props) {
                 <select onChange={(e) => getFormFild('year', e)}>
                     <option value={""}></option>
                     {     
-                        Array(new Date().getFullYear() + 1).fill(1986).map((el, i) =>
-                            i >= 1886?<option key={i} value={i}>{i}</option>: ''
-                        )
+                        Array(new Date().getFullYear() + 1)
+                            .fill(1986)
+                            .map(
+                                (el, i) => (i >= 1886)? <option key={i} value={i}>{i}</option>: ''
+                            )
                     }
                 </select>
             </div>
