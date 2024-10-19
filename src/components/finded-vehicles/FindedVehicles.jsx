@@ -9,6 +9,7 @@ import CloseButtonIcon from '../../icons/CloseButtonIcon';
 import { favoriteService } from "../../services/FavoriteService";
 import { colorService } from "../../services/ColorsService";
 import { favoriteLocalService } from '../../services/FavoriteLocalService';
+
 import Vehicle from "../vehicle/Vehicle";
 
 export default function FindedVehicles(props) {
@@ -23,19 +24,15 @@ export default function FindedVehicles(props) {
         const onlyVehicles = [];
         const onlyFavorites = [];
         props.findeds.forEach((vehicle) => {
-            const exists = favorites.findIndex(
-                (favorite) => vehicle.id === favorite.idVehicle
-            ) !== -1? true: false;
+            const founded = favorites.findIndex((favorite) => vehicle.id === favorite.idVehicle)
+            const exists = founded !== -1? true: false;
             if (exists) {
                 onlyFavorites.push(vehicle);
             } else {
                 onlyVehicles.push(vehicle);
             }
         });
-        setVehicles({
-            findeds: onlyVehicles,
-            favorites: onlyFavorites
-        });
+        setVehicles({ findeds: onlyVehicles, favorites: onlyFavorites });
     }
 
     useEffect(() => { 
@@ -44,20 +41,14 @@ export default function FindedVehicles(props) {
 
     function removeFindedVehicle(idVehicle) {
         const updatedVehicles = vehicles.findeds
-        .filter((vehicle) => vehicle.id !== idVehicle);
-        setVehicles({
-            findeds: updatedVehicles,
-            favorites: vehicles.favorites
-        });
+            .filter((vehicle) => vehicle.id !== idVehicle);
+        setVehicles({ findeds: updatedVehicles, favorites: vehicles.favorites });
     }
 
     function removeFavoriteVehicle(idVehicle) {
         const updatedVehicles = vehicles.favorites
-        .filter((vehicle) => vehicle.id !== idVehicle);
-        setVehicles({
-            findeds: vehicles.findeds,
-            favorites: updatedVehicles
-        });
+            .filter((vehicle) => vehicle.id !== idVehicle);
+        setVehicles({ findeds: vehicles.findeds, favorites: updatedVehicles });
     }
 
     async function createFavorite(idVehicle) {
@@ -68,17 +59,14 @@ export default function FindedVehicles(props) {
             favoriteLocalService.addFavorite(newFavorite);
             // remove of findeds
             const newfindeds = vehicles.findeds
-            .filter((vehicle) => vehicle.id !== idVehicle);
+                .filter((vehicle) => vehicle.id !== idVehicle);
             // copy the vehicle
             const newVehicleFavorite = vehicles.findeds
-            .filter((vehicle) => vehicle.id === idVehicle)[0]
+                .filter((vehicle) => vehicle.id === idVehicle)[0]
             //update favorites
             const newfavorites = vehicles.favorites;
             newfavorites.push(newVehicleFavorite);
-            setVehicles({ 
-                findeds: newfindeds,
-                favorites: newfavorites
-            });
+            setVehicles({ findeds: newfindeds, favorites: newfavorites });
         })
     }
 
@@ -167,12 +155,9 @@ export default function FindedVehicles(props) {
             {ShowFavoritesVehicles()}
             {vehicles.findeds.length > 0? <h3>Anúncios</h3>: ''}
             {ShowFindedsVehicles()}
-
             {
-                vehicles.findeds.length === 0 &&
-                vehicles.favorites.length === 0 ?
-                <h3>Nenhum anúncio encontrado :(</h3> :
-                ''
+                vehicles.findeds.length === 0 && vehicles.favorites.length === 0 ?
+                    <h3>Nenhum anúncio encontrado :(</h3> : ''
             }
         </div>
     )
