@@ -12,15 +12,15 @@ import { favoriteLocalService } from './services/FavoriteLocalService';
 
 async function loadFavorites() {
     await favoriteService.getFavorites()
-    .then((apiResponse) => {
-        const favorites = apiResponse.data.favoriteList
-        favoriteLocalService.setFavorites(favorites);
-    });
+        .then((apiResponse) => {
+            const favorites = apiResponse.data.favoriteList
+            favoriteLocalService.setFavorites(favorites);
+        });
 }
   
 async function createSessionIfNotExists() {
     if (sessionService.getSession()) { 
-       return 
+       return;
     } else {
         await sessionService.createSession();
     }
