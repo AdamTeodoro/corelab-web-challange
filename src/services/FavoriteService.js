@@ -10,20 +10,12 @@ function FavoriteService(authorization) {
     };
     return {
         getFavorites: () => api.get('/favorite/my', config),
-        createFavorite: (idVehicle) => api.post(
-            '/favorite', 
-            {
-                idVehicle
-            },
-            config
-        ),
+        createFavorite: (idVehicle) => api.post('/favorite', { idVehicle }, config),
         deleteFavorite: (idFavorite) => api.delete(
             '/favorite', 
             {
                 headers: config.headers,
-                params: {
-                    idFavorite
-                },
+                params: { idFavorite },
             }
         )
     }
