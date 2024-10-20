@@ -21,9 +21,7 @@ function FavoriteLocalService() {
 
     function removeFavorite(idFavorite) {
         const favorites = getFavorites();
-        const newFavorites = favorites.filter(
-            (f) => f.id !== idFavorite
-        );
+        const newFavorites = favorites.filter((f) => f.id !== idFavorite);
         setFavorites(newFavorites);
     }
 
