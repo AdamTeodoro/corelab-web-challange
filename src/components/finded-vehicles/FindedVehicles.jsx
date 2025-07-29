@@ -53,21 +53,21 @@ export default function FindedVehicles(props) {
 
     async function createFavorite(idVehicle) {
         await favoriteService.createFavorite(idVehicle)
-        .then((apiResponse) => {
-            // save local
-            const newFavorite = apiResponse.data.newFavorite;
-            favoriteLocalService.addFavorite(newFavorite);
-            // remove of findeds
-            const newfindeds = vehicles.findeds
-                .filter((vehicle) => vehicle.id !== idVehicle);
-            // copy the vehicle
-            const newVehicleFavorite = vehicles.findeds
-                .filter((vehicle) => vehicle.id === idVehicle)[0]
-            //update favorites
-            const newfavorites = vehicles.favorites;
-            newfavorites.push(newVehicleFavorite);
-            setVehicles({ findeds: newfindeds, favorites: newfavorites });
-        })
+            .then((apiResponse) => {
+                // save local
+                const newFavorite = apiResponse.data.newFavorite;
+                favoriteLocalService.addFavorite(newFavorite);
+                // remove of findeds
+                const newfindeds = vehicles.findeds
+                    .filter((vehicle) => vehicle.id !== idVehicle);
+                // copy the vehicle
+                const newVehicleFavorite = vehicles.findeds
+                    .filter((vehicle) => vehicle.id === idVehicle)[0]
+                //update favorites
+                const newfavorites = vehicles.favorites;
+                newfavorites.push(newVehicleFavorite);
+                setVehicles({ findeds: newfindeds, favorites: newfavorites });
+            })
     }
 
     async function deleteFavorite(idVehicle) {
